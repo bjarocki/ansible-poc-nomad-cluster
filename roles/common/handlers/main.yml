@@ -1,0 +1,4 @@
+---
+
+- name: setup dummy0 interface
+  shell: /sbin/ifup dummy0

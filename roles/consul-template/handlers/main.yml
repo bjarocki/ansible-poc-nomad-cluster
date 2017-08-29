@@ -1,0 +1,7 @@
+---
+
+- name: systemd daemon-reload
+  shell: systemctl daemon-reload
+
+- name: consul-template reload
+  shell: pkill -HUP consul-template || systemctl start consul-template

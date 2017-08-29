@@ -1,0 +1,155 @@
+{
+  "Job": {
+    "AllAtOnce": false,
+    "Constraints": [
+      {
+        "LTarget": "${attr.kernel.name}",
+        "Operand": "=",
+        "RTarget": "linux"
+      }
+    ],
+    "CreateIndex": 114,
+    "Datacenters": [
+      "dc1"
+    ],
+    "ID": "hashiui",
+    "JobModifyIndex": 142,
+    "Meta": null,
+    "ModifyIndex": 142,
+    "Name": "hashiui",
+    "ParameterizedJob": null,
+    "ParentID": "",
+    "Payload": null,
+    "Periodic": null,
+    "Priority": 50,
+    "Region": "global",
+    "Stable": false,
+    "Status": "running",
+    "StatusDescription": "",
+    "Stop": false,
+    "SubmitTime": 1504009065770495200,
+    "TaskGroups": [
+      {
+        "Constraints": null,
+        "Count": 1,
+        "EphemeralDisk": {
+          "Migrate": false,
+          "SizeMB": 300,
+          "Sticky": false
+        },
+        "Meta": null,
+        "Name": "hashiui",
+        "RestartPolicy": {
+          "Attempts": 10,
+          "Delay": 25000000000,
+          "Interval": 300000000000,
+          "Mode": "delay"
+        },
+        "Tasks": [
+          {
+            "Artifacts": null,
+            "Config": {
+              "port_map": [
+                {
+                  "rack": 3000
+                }
+              ],
+              "image": "jippi/hashi-ui"
+            },
+            "Constraints": null,
+            "DispatchPayload": null,
+            "Driver": "docker",
+            "Env": {
+              "CONSUL_READ_ONLY": "true",
+              "NOMAD_ADDR": "http://nomad.service.consul:4646",
+              "NOMAD_ENABLE": "true",
+              "NOMAD_READ_ONLY": "true",
+              "CONSUL_ADDR": "consul.service.consul:8500",
+              "CONSUL_ENABLE": "true"
+            },
+            "KillTimeout": 5000000000,
+            "Leader": false,
+            "LogConfig": {
+              "MaxFileSizeMB": 10,
+              "MaxFiles": 10
+            },
+            "Meta": null,
+            "Name": "hashiui",
+            "Resources": {
+              "CPU": 2048,
+              "DiskMB": 0,
+              "IOPS": 0,
+              "MemoryMB": 1024,
+              "Networks": [
+                {
+                  "CIDR": "",
+                  "Device": "",
+                  "DynamicPorts": [
+                    {
+                      "Label": "rack",
+                      "Value": 0
+                    }
+                  ],
+                  "IP": "",
+                  "MBits": 1,
+                  "ReservedPorts": null
+                }
+              ]
+            },
+            "Services": [
+              {
+                "AddressMode": "auto",
+                "Checks": [
+                  {
+                    "Args": null,
+                    "Command": "",
+                    "Id": "",
+                    "InitialStatus": "",
+                    "Interval": 20000000000,
+                    "Name": "alive",
+                    "Path": "/",
+                    "PortLabel": "",
+                    "Protocol": "http",
+                    "TLSSkipVerify": false,
+                    "Timeout": 2000000000,
+                    "Type": "http"
+                  }
+                ],
+                "Id": "",
+                "Name": "hashiui",
+                "PortLabel": "rack",
+                "Tags": [
+                  "http-service"
+                ]
+              }
+            ],
+            "Templates": null,
+            "User": "",
+            "Vault": null
+          }
+        ],
+        "Update": {
+          "AutoRevert": false,
+          "Canary": 0,
+          "HealthCheck": "checks",
+          "HealthyDeadline": 300000000000,
+          "MaxParallel": 1,
+          "MinHealthyTime": 10000000000,
+          "Stagger": 10000000000
+        }
+      }
+    ],
+    "Type": "service",
+    "Update": {
+      "AutoRevert": false,
+      "Canary": 0,
+      "HealthCheck": "",
+      "HealthyDeadline": 0,
+      "MaxParallel": 1,
+      "MinHealthyTime": 0,
+      "Stagger": 10000000000
+    },
+    "VaultToken": "",
+    "Version": 1
+  }
+}

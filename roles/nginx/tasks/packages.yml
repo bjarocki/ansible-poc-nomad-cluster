@@ -1,0 +1,6 @@
+---
+
+- name: install packages
+  apt:
+    name: "{{ item.name }}"
+  with_items: "{{ nginx_packages }}"

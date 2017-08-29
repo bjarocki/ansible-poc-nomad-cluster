@@ -1,0 +1,48 @@
+---
+
+- name: create consul-template configuration directory
+  file:
+    path: /etc/consul-template.d
+    state: directory
+    mode: 0755
+
+- name: create consul-template templates directory
+  file:
+    path: /etc/consul-templates
+    state: directory
+    mode: 0755
+
+- name: set consul-template nginx template
+  notify: consul-template reload
+  copy:
+    src: files/nginx/nginx-http-services.ctmpl
+    dest: /etc/consul-templates/nginx-http-services.ctmpl
+
+- name: set consul-template nginx configuration
+  notify: consul-template reload
+  copy:
+    src: files/nginx/nginx-http-services
+    dest: /etc/consul-template.d/nginx-http-services
+
+- name: setup consul-template systemd
+  notify: systemd daemon-reload
+  copy:
+    dest: /etc/systemd/system/multi-user.target.wants/consul-template.service
+    content: |
+      [Unit]
+      Description=Consul Template Daemon
+      Wants=basic.target
+      After=basic.target network.target
+
+      [Service]
+      User=root
+      Group=root
+      ExecStart=/usr/local/bin/consul-template -config /etc/consul-template.d
+      ExecReload=/bin/kill -HUP $MAINPID
+      KillMode=process
+      Restart=on-failure
+      RestartSec=42s
+
+      [Install]
+      WantedBy=multi-user.target
+

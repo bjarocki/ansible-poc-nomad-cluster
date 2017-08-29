@@ -1,0 +1,11 @@
+---
+
+- name: add docker apt gpg key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: F76221572C52609D
+
+- name: add docker repository
+  apt_repository:
+    repo: deb https://apt.dockerproject.org/repo ubuntu-xenial main
+    state: present

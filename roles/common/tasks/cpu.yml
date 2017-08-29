@@ -1,0 +1,7 @@
+---
+- name: set cpu frequency scaling to 'performance'
+  shell: |
+    for core in `seq 1 "{{ ansible_processor_vcpus }}"`; do
+      id=$((core - 1))
+      echo 'performance' > /sys/devices/system/cpu/cpu$id/cpufreq/scaling_governor
+    done

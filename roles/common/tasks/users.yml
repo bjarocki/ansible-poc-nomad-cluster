@@ -1,0 +1,15 @@
+---
+
+- name: add all users
+  user:
+    name: "{{ item.name }}"
+    shell: "{{ item.shell }}"
+    groups: "{{ item['groups'] }}"
+  with_items: "{{ users }}"
+
+- name: set users public ssh keys
+  authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "{{ item.ssh_public_key }}"
+  with_items: "{{ users }}"

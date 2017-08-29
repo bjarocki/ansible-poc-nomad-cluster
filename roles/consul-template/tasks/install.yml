@@ -1,0 +1,19 @@
+---
+
+- name: create consul-template bin directory
+  file:
+    path: /usr/local/bin/consul-template_{{consul_template_version}}
+    state: directory
+    mode: 0755
+
+- name: download and unpack consul-template
+  unarchive:
+    src: "{{ consul_template_url }}"
+    dest: /usr/local/bin/consul-template_{{consul_template_version}}
+    remote_src: True
+
+- name: link consul-template binary
+  file:
+    src: /usr/local/bin/consul-template_{{consul_template_version}}/consul-template
+    dest: /usr/local/bin/consul-template
+    state: link

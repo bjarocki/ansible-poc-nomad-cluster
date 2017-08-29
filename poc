@@ -1,0 +1,22 @@
+[nomad-cluster]
+X.Y.Z.A consul_node_role=bootstrap nomad_job_deployer=true
+X.Y.Z.B
+X.Y.Z.C
+
+[docker:children]
+nomad-cluster
+
+[consul:children]
+nomad-cluster
+
+[consul-template:children]
+nomad-cluster
+
+[nginx:children]
+nomad-cluster
+
+[consul_instances:children]
+nomad-cluster
+
+[nomad_cluster_nodes:children]
+nomad-cluster

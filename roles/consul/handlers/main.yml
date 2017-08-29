@@ -1,0 +1,7 @@
+---
+
+- name: restart dnsmasq
+  shell: systemctl restart dnsmasq
+
+- name: reload nginx
+  shell: nginx -t && nginx -s reload

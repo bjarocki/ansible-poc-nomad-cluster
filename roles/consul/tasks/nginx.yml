@@ -1,0 +1,12 @@
+---
+
+- name: check nginx configuration
+  stat: path=/etc/nginx/sites-enabled
+  register: nginx_sites_enabled
+
+- name: setup consul nginx upstream
+  notify: reload nginx
+  template:
+    dest: /etc/nginx/sites-enabled/consul.service.consul.conf
+    src: templates/consul/consul.service.consul.conf.j2
+  when: nginx_sites_enabled.stat.exists == True

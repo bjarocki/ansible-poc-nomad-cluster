@@ -1,0 +1,7 @@
+server {
+  listen {{ hostvars[inventory_hostname]['ansible_'+ consul_iface ]['ipv4']['address'] }}:8500;
+  server_name consul.service.consul;
+  location / {
+    proxy_pass http://127.0.0.1:8500;
+  }
+}

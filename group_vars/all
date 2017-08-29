@@ -1,0 +1,12 @@
+---
+common_packages:
+  - name: jq
+
+become: true
+sshd:
+  AllowGroups: ssh
+users:
+  - name: bartek
+    groups: "ssh,sudo"
+    shell: /bin/bash
+    ssh_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCoXpBM2Tp05JRIsGMrdxS9n6a+YSornkhraZgP2q/rlRA7cSeFziAGdp+VQUS/1heJK9fkac3UoffgeAtMINaVumd8BL4XfhXfSc9KtnSsD5YwgBpX1iCI52uHLZFf557VzvLPLiGjHwa/bGI53ljZkzV1Z5AKCjx3orG8b3vSErnrRIOFR9dF1KceL6DaHuVf9k7ducvX0VAXOtU6SQJtVFMrKdfkN2/Id1iyhcKUCTWU5gYejZuFMuRtwU6amGfVKiRgx2N18atE6P1/A9Tm1QmdyFtfxLW8oDNnz34DzbNDdZ3is7sfu0kJliOqgcAVXTRS0V6zH6G+BVbCZ8FgmmdZ6f3rj6Rv+Bq4raCpHhBmxMUXmiyQqHUWBqgRmgFAXfuAMgd57PRFZnMKgBug1TTm5mb7hIhTalb8TuqKppOA3++Yk6TRKhUnQoFDzbv5WcUCrHD7Q64n2t7IZYZv5EKJKQEhBZdgHpEw+BAURAPDUF4+ycCSwnaHbqwnLicwvJvn1DOHtYHVn4wjHn/oV/PKaa7gVUPLNQmomFtMexOE9CcRMDX6nPS7oSbY4/DU54AoThfoh6lUnXojiEPunIWGhQy5GJSSEWDaAZUsgDgBNbbY0Z+2cvE5nedPArX0z/qvDw4y2g8A+HcKalMjbX96hhIOb2RAubrhcZ3p+w== xps13"

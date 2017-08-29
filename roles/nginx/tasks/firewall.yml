@@ -1,0 +1,20 @@
+---
+
+- name: activate UFW
+  ufw:
+    state: enabled
+    policy: deny
+
+- name: open https to the world
+  ufw:
+    name: public-https
+    rule: allow
+    port: https
+    proto: tcp
+
+- name: open http to the world
+  ufw:
+    name: public-http
+    rule: allow
+    port: http
+    proto: tcp

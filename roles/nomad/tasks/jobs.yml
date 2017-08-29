@@ -1,0 +1,41 @@
+---
+
+- name: check nomad jobs
+  uri:
+    url: "http://nomad.service.consul:4646/v1/job/{{ item }}"
+    method: GET
+    status_code: 200, 404
+  register: json_response
+  with_items: "{{ jobs }}"
+  when: nomad_job_deployer
+
+- name: setting nomad_running_jobs fact
+  set_fact:
+    nomad_running_jobs: "{{ nomad_running_jobs|default({}) | combine( {item.json.Name: item.json} ) }}"
+    when:
+  with_items: "{{ json_response.results }}"
+  when:
+    - nomad_job_deployer
+    - item.json is defined
+    - item.json.Status != "dead"
+
+
+- name: deploy missing jobs
+  uri:
+    url: http://nomad.service.consul:4646/v1/jobs
+    method: POST
+    body: "{{ lookup('file','files/nomad-jobs/' + item + '.json') }}"
+    body_format: json
+  with_items: "{{ jobs }}"
+  when:
+    - nomad_job_deployer
+    - item not in nomad_running_jobs.keys()
+
+
+- name: debug info
+  debug:
+    msg: "{{ item }}"
+  with_items: "{{ jobs }}"
+  when:
+    - nomad_job_deployer
+    - item not in nomad_running_jobs.keys()

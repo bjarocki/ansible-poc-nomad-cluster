@@ -1,0 +1,122 @@
+{
+  "Job": {
+    "AllAtOnce": false,
+    "Constraints": null,
+    "CreateIndex": 46,
+    "Datacenters": [
+      "dc1"
+    ],
+    "ID": "docker-demo",
+    "JobModifyIndex": 46,
+    "Meta": null,
+    "ModifyIndex": 48,
+    "Name": "docker-demo",
+    "ParameterizedJob": null,
+    "ParentID": "",
+    "Payload": null,
+    "Periodic": null,
+    "Priority": 50,
+    "Region": "global",
+    "Status": "running",
+    "StatusDescription": "",
+    "TaskGroups": [
+      {
+        "Constraints": null,
+        "Count": 4,
+        "EphemeralDisk": {
+          "Migrate": false,
+          "SizeMB": 300,
+          "Sticky": false
+        },
+        "Meta": null,
+        "Name": "docker-demo",
+        "RestartPolicy": {
+          "Attempts": 10,
+          "Delay": 2500000000,
+          "Interval": 300000000000,
+          "Mode": "delay"
+        },
+        "Tasks": [
+          {
+            "Artifacts": [],
+            "Config": {
+              "image": "ehazlett/docker-demo",
+              "port_map": [
+                {
+                  "docker-demo": 8080
+                }
+              ]
+            },
+            "Constraints": null,
+            "DispatchPayload": null,
+            "Driver": "docker",
+            "Env": null,
+            "KillTimeout": 5000000000,
+            "Leader": false,
+            "LogConfig": {
+              "MaxFileSizeMB": 10,
+              "MaxFiles": 10
+            },
+            "Meta": null,
+            "Name": "docker-demo",
+            "Resources": {
+              "CPU": 500,
+              "DiskMB": 0,
+              "IOPS": 0,
+              "MemoryMB": 256,
+              "Networks": [
+                {
+                  "CIDR": "",
+                  "DynamicPorts": [
+                    {
+                      "Label": "docker-demo",
+                      "Value": 0
+                    }
+                  ],
+                  "IP": "",
+                  "MBits": 10,
+                  "Public": false,
+                  "ReservedPorts": null
+                }
+              ]
+            },
+            "Services": [
+              {
+                "Checks": [
+                  {
+                    "Args": null,
+                    "Command": "",
+                    "Id": "",
+                    "InitialStatus": "",
+                    "Interval": 10000000000,
+                    "Name": "alive",
+                    "Path": "",
+                    "PortLabel": "",
+                    "Protocol": "",
+                    "Timeout": 2000000000,
+                    "Type": "tcp"
+                  }
+                ],
+                "Id": "",
+                "Name": "docker-demo",
+                "PortLabel": "docker-demo",
+                "Tags": [
+                  "http-service"
+                ]
+              }
+            ],
+            "Templates": [],
+            "User": "",
+            "Vault": null
+          }
+        ]
+      }
+    ],
+    "Type": "service",
+    "Update": {
+      "MaxParallel": 1,
+      "Stagger": 10000000000
+    },
+    "VaultToken": ""
+  }
+}

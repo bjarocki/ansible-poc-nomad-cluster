@@ -1,0 +1,33 @@
+---
+- hosts: all
+  roles:
+    - common
+    - willshersystems.sshd
+
+- hosts: nginx
+  roles:
+    - nginx
+
+- hosts: docker
+  roles:
+    - docker
+
+- hosts: consul
+  roles:
+    - brianshumate.consul
+
+- hosts: consul
+  roles:
+    - consul
+
+- hosts: consul
+  roles:
+    - consul-template
+
+- hosts: nomad_cluster_nodes
+  roles:
+    - brianshumate.nomad
+
+- hosts: nomad_cluster_nodes
+  roles:
+    - nomad

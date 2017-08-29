@@ -1,0 +1,12 @@
+---
+
+- name: activate UFW
+  ufw:
+    state: enabled
+    policy: deny
+
+- name: accept docker0 traffic
+  ufw:
+    rule: allow
+    interface: docker0
+    direction: in

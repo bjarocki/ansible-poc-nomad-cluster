@@ -1,0 +1,33 @@
+---
+
+- name: add dummy networking module
+  modprobe:
+    name: dummy
+    state: present
+
+- name: make sure we load dummy module while booting
+  lineinfile:
+    dest: /etc/modules-load.d/dummy.conf
+    create: yes
+    regexp: '^dummy'
+    line: 'dummy'
+
+- name: make sure we include interface.d in network/interfaces
+  lineinfile:
+    dest: /etc/network/interfaces
+    regexp: '^source'
+    line: "source /etc/network/interfaces.d/*"
+
+- name: setup dummy0 interface configuration
+  copy:
+    dest: /etc/network/interfaces.d/dummy0.cfg
+    content: |
+            auto dummy0
+            iface dummy0 inet static
+            address 10.0.0.1
+            netmask 255.255.255.0
+  notify:
+    - setup dummy0 interface
+
+- name: force all notified handlers to run at this point, not waiting for normal sync points
+  meta: flush_handlers

@@ -1,0 +1,26 @@
+---
+
+- name: ensure docker is at the latest version
+  apt: name=docker-engine state=latest
+
+- name: Ensure systemd use /etc/default/docker
+  notify: reload systemd
+  copy:
+    dest: /lib/systemd/system/docker.service
+    src: files/docker/docker.service
+
+- name: Ensure systemd use $DOCKER_OPTS
+  notify: reload systemd
+  lineinfile:
+    dest: /etc/systemd/system/multi-user.target.wants/docker.service
+    state: present
+    regexp: '^ExecStart='
+    line: 'ExecStart=/usr/bin/dockerd $DOCKER_OPTS'
+
+- name: Set /etc/default/docker
+  notify: restart docker
+  lineinfile:
+    dest: /etc/default/docker
+    state: present
+    regexp: '^.?DOCKER_OPTS='
+    line: "DOCKER_OPTS=\"{{ docker_opts }}\""

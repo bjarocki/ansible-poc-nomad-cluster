@@ -1,0 +1,10 @@
+---
+
+- name: add nginx ppa gpg key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: C300EE8C
+
+- name: add nginx ppa repository
+  apt_repository:
+    repo: 'ppa:nginx/stable'

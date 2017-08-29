@@ -1,0 +1,11 @@
+---
+
+- name: open ssh to the world
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+# - name: activate UFW
+#  ufw:
+#    state: enabled
+#    policy: deny

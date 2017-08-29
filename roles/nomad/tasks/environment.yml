@@ -1,0 +1,8 @@
+---
+
+- name: setup nomad environment
+  lineinfile:
+    path: /etc/environment
+    state: present
+    regexp: '^NOMAD_ADDR='
+    line: "NOMAD_ADDR=http://{{ hostvars[inventory_hostname]['ansible_'+ nomad_iface ]['ipv4']['address'] }}:4646"

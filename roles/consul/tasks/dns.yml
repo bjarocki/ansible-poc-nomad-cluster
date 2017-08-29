@@ -1,0 +1,11 @@
+---
+
+- name: install dnsmasq
+  apt:
+    name: dnsmasq
+
+- name: setup dnsmasq consul tld
+  notify: restart dnsmasq
+  template:
+    dest: /etc/dnsmasq.d/dns.conf
+    src: templates/consul/dns.conf.j2
