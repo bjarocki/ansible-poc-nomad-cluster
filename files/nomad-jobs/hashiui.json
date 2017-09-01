@@ -76,7 +76,7 @@
             "Meta": null,
             "Name": "hashiui",
             "Resources": {
-              "CPU": 2048,
+              "CPU": 512,
               "DiskMB": 0,
               "IOPS": 0,
               "MemoryMB": 1024,
