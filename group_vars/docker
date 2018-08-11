@@ -1,4 +1,4 @@
 ---
 
-dns_interface: ens4
+dns_interface: eth0
 docker_opts: "-H unix:///var/run/docker.sock --dns={{ hostvars[inventory_hostname]['ansible_'+ nomad_iface ]['ipv4']['address'] }} --storage-driver=overlay2 --ip-masq=false --iptables=false --ipv6=false"
