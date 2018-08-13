@@ -4,3 +4,6 @@
   apt:
     name: "{{ item.name }}"
   with_items: "{{ nginx_packages }}"
+
+- name: start nginx
+  shell: systemctl enable nginx && systemctl start nginx

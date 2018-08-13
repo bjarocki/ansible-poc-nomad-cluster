@@ -1,4 +1,4 @@
 ---
 - include: ppa.yml
-- include: packages.yml
+- include: install.yml
 - include: sites.yml

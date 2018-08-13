@@ -12,18 +12,6 @@
     state: directory
     mode: 0755
 
-- name: set consul-template nginx template
-  notify: consul-template reload
-  copy:
-    src: files/nginx/nginx-http-services.ctmpl
-    dest: /etc/consul-templates/nginx-http-services.ctmpl
-
-- name: set consul-template nginx configuration
-  notify: consul-template reload
-  copy:
-    src: files/nginx/nginx-http-services
-    dest: /etc/consul-template.d/nginx-http-services
-
 - name: setup consul-template systemd
   notify: systemd daemon-reload
   copy:
@@ -45,4 +33,16 @@
 
       [Install]
       WantedBy=multi-user.target
+
+- name: set consul-template nginx template
+  notify: consul-template reload
+  copy:
+    src: files/nginx/nginx-http-services.ctmpl
+    dest: /etc/consul-templates/nginx-http-services.ctmpl
+
+- name: set consul-template nginx configuration
+  notify: consul-template reload
+  copy:
+    src: files/nginx/nginx-http-services
+    dest: /etc/consul-template.d/nginx-http-services
 
